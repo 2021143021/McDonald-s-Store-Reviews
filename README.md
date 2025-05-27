@@ -1,5 +1,3 @@
-# McDonald-s-Store-Reviews
-캡스톤프로젝트 기말
 # 🍔 맥도날드 리뷰 감성 분석 프로젝트 (Sentiment Analysis on McDonald's Reviews using MobileBERT)
 
 <p align="center">
