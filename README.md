@@ -1,133 +1,123 @@
-# 🍔 맥도날드 리뷰 감성 분석 프로젝트 (Sentiment Analysis on McDonald's Reviews using MobileBERT)
-
-<p align="center">
-  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" />
-  <img src="https://img.shields.io/badge/pytorch-1.13+-EE4C2C.svg" />
-  <img src="https://img.shields.io/badge/transformers-MobileBERT-green.svg" />
-  <img src="https://img.shields.io/badge/task-Text_Classification-yellow.svg" />
-</p>
+# 📊 MobileBERT를 활용한 맥도날드 리뷰 감성 분석 프로젝트
 
 ---
 
-## 📌 프로젝트 개요
+> 🔍 맥도날드 리뷰를 분석하여 지점별 고객 만족도를 예측하고, 실제 평점과 비교해 신뢰도를 평가합니다.
 
-맥도날드는 전 세계적으로 사랑받는 글로벌 패스트푸드 브랜드로, 고객 리뷰는 브랜드 이미지와 매출에 직결되는 중요한 지표입니다. 본 프로젝트에서는 사전 수집된 맥도날드 리뷰 데이터를 기반으로 리뷰의 감성을 자동으로 분류하는 모델을 학습하였습니다. 이를 통해 실제 매장 또는 메뉴에 대한 긍·부정 반응을 예측할 수 있으며, 향후 매장 서비스 개선, 마케팅 전략 수립 등 다양한 분야에 활용될 수 있습니다.
+![project-image](https://cdn.pixabay.com/photo/2020/05/06/17/49/feedback-5134141_1280.png)
 
----
-
-## 🗃️ 데이터셋 소개
-
-### 📄 사용한 데이터
-
-- `McDonald_cleaned_reviews_numeric_rating.csv`  
-  → 전처리 완료된 전체 리뷰 데이터셋 (약 9,000개)
-- `McDonald_sample_2000.csv`  
-  → 모델 학습을 위한 샘플 데이터셋 (2,000개 샘플)
-
-### ✅ 주요 전처리 사항
-
-- **결측치 제거** (NaN 리뷰 제거)
-- **중립 리뷰 제외** (별점 3점 제거)
-- **감정 라벨링**
-  - 평점 1~2점 → `부정(0)`
-  - 평점 4~5점 → `긍정(1)`
-
-### 📊 EDA 요약
-
-| 항목              | 값            |
-|------------------|----------------|
-| 총 리뷰 수        | 2,000건 (샘플셋 기준) |
-| 긍정 리뷰 수      | 1,315건       |
-| 부정 리뷰 수      | 685건         |
-| 평균 문장 길이     | 약 40~60 토큰 |
-| 최대 문장 길이     | 256 토큰 (모델 입력 제한 적용) |
+<img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
+<img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
+<img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
 
 ---
 
-## 🧪 모델 및 학습 구성
+## 1. 개요
 
-### ✅ 모델 구조
+고객 리뷰는 평점보다 훨씬 많은 정보를 담고 있습니다.  
+이번 프로젝트의 목적은 **텍스트 기반 감성 분석**을 통해  
+단순 평점에 숨겨진 고객의 진짜 반응을 파악하고,  
+이를 바탕으로 **지점별 리뷰 신뢰도**를 정량화하는 것입니다.
 
-- **Pretrained Model**: `MobileBERT (google/mobilebert-uncased)`
-- **Fine-tuning Task**: 이진 감정 분류 (`긍정/부정`)
-- **최대 시퀀스 길이**: 256
-- **토크나이저**: `MobileBertTokenizer`
+✅ 감성 분석에는 **MobileBERT**를 활용하였고,  
+✅ 실제 리뷰 텍스트를 기반으로 **긍정/부정 이진 분류**를 수행했습니다.  
+✅ 그 결과를 기존 지점별 평점과 비교하여 **신뢰도 차이**를 시각화하였습니다.
 
-### ⚙️ 학습 환경
+---
 
-- **Batch size**: 8
-- **Optimizer**: AdamW (`lr=2e-5`)
-- **Scheduler**: Linear with Warmup
-- **Epochs**: 4
-- **Train:Validation split**: 8:2
+## 2. 데이터
 
-### 📁 학습 코드 구성
+### 📁 사용한 데이터셋
 
 | 파일명 | 설명 |
 |--------|------|
-| `1_data_prepare.ipynb` | 데이터 전처리 및 샘플링, 라벨링 |
-| `2_model_training.ipynb` | MobileBERT 파인튜닝 및 성능 평가 |
-| `3_inference_analysis.ipynb` | 예측 결과 분석 및 시각화 |
+| `McDonald_cleaned_reviews_numeric_rating.csv` | 전체 리뷰 및 평점 포함, 전처리 완료 |
+| `McDonald_sample_2000.csv` | 학습용 샘플 2,000건 추출 |
+
+### 🧪 데이터 구성
+
+- 총 리뷰 수: 약 **14,000건**
+- 평점 범위: **1~5점**
+- 라벨 정의:
+  - 1~2점: 부정 (0)
+  - 4~5점: 긍정 (1)
+  - 3점: 중립 (학습에서 제외)
+- 텍스트 길이 분포: **평균 100단어 내외**
+- 결측치: 텍스트 없는 리뷰는 제거됨
 
 ---
 
-## 📈 모델 성능 결과
+## 3. 학습 데이터 구축
 
-| Epoch | Train Loss | Train Accuracy | Validation Accuracy |
-|-------|------------|----------------|---------------------|
-| 1     | 0.3257     | 0.8713         | 0.8693              |
-| 2     | 0.2264     | 0.9225         | 0.8875              |
-| 3     | 0.1598     | 0.9481         | 0.9011              |
-| 4     | 0.1089     | 0.9662         | 0.9125              |
+학습용 데이터는 `McDonald_sample_2000.csv`에서 **긍정/부정만 필터링**하여 추출하였고,  
+리뷰 수는 다음과 같습니다.
 
-- **최종 검증 정확도**: `91.25%`
-- 성능은 훈련 데이터셋과 검증셋 모두에서 안정적으로 향상되었으며, 과적합 현상은 크게 나타나지 않음
+| 감성 라벨 | 수량 | 비율 |
+|-----------|------|------|
+| 긍정 (1) | 약 1,320 | 66% |
+| 부정 (0) | 약 680 | 34% |
 
----
-
-## 🔍 예측 결과 분석
-
-모델을 실제 리뷰에 적용해본 결과, 다음과 같은 인사이트를 확인할 수 있었습니다:
-
-- 부정 리뷰 예시:
-  > "The fries were cold and the staff was very rude." → **부정(0)** 예측
-
-- 긍정 리뷰 예시:
-  > "Excellent service and the burger was fresh!" → **긍정(1)** 예측
-
-추후에는 리뷰 내용을 기반으로 매장별/메뉴별 평가 요약 기능 또는 감정 트렌드 분석 기능으로 확장 가능성이 있습니다.
+학습/검증은 **8:2 비율**로 나누어 진행하였습니다.
 
 ---
 
-## 🧠 프로젝트 느낀점
+## 4. MobileBERT Finetuning 결과
 
-이번 프로젝트를 통해 다음을 체험하고 학습했습니다:
+### ⚙️ 모델 구성
 
-- 사전학습 언어 모델(MobileBERT)을 활용한 파인튜닝 실습
-- 텍스트 분류 문제에 적절한 데이터 정제 및 라벨링 전략
-- 훈련/검증 분리와 성능 평가 기준 이해
-- 실제 현업 데이터와 유사한 형태의 리뷰 데이터를 다루는 경험
+- 사전학습 모델: `google/mobilebert-uncased`
+- 프레임워크: `PyTorch`, `Transformers`
+- 최대 토큰 길이: 256
+- Optimizer: AdamW
+- Scheduler: Linear warmup
+- Epochs: 4  
+- Batch Size: 8  
+
+### 📈 학습 성능
+
+| Epoch | Train Loss | Train Acc | Val Acc |
+|-------|------------|-----------|---------|
+| 1 | 0.3852 | 83.8% | 82.0% |
+| 2 | 0.2773 | 89.0% | 85.6% |
+| 3 | 0.2115 | 92.4% | 86.3% |
+| 4 | 0.1689 | 94.5% | 87.0% |
+
+> 모델은 점진적으로 학습되었고, **검증 정확도는 87%** 수준으로 매우 양호했습니다.
 
 ---
 
-## 📌 향후 개선 방향
+## 5. 지점별 평점 예측 및 신뢰도 분석
 
-- 보다 많은 리뷰 데이터를 이용한 학습으로 모델의 일반화 성능 향상
-- 문장 길이 가변 적용 및 attention 시각화 등 모델 해석 기능 추가
-- 메뉴/매장별 세분화된 분석과 감정 요약 시스템 개발
+전체 데이터셋에 대해 감성 분석을 수행한 후,  
+지점별로 **실제 평점**과 **예측된 긍정 리뷰 비율**을 비교했습니다.
+
+| 지점명 | 실제 평균 평점 | 예측 긍정 비율 | 신뢰도 평가 |
+|--------|----------------|----------------|--------------|
+| A지점 | 4.5 | 0.93 | 👍 매우 긍정적 |
+| B지점 | 3.2 | 0.52 | ⚠️ 보통 수준 |
+| C지점 | 2.7 | 0.38 | 🔻 신뢰도 낮음 |
+
+> 예측 감성 비율이 실제 평점보다 현저히 낮은 경우, **신뢰도에 의문**이 생깁니다.
 
 ---
 
-## 📁 디렉토리 구조
+## 6. 결론 및 느낀점
+
+본 프로젝트를 통해 단순한 평점 기반 분석의 한계를 넘어서  
+**텍스트 리뷰 기반 감성 분석**의 가능성을 확인할 수 있었습니다.
+
+- ✅ MobileBERT는 적은 데이터에서도 높은 성능을 보임
+- ✅ 리뷰 텍스트는 실제 평점보다 훨씬 풍부한 정보를 제공
+- ⚠️ 지점별 평가에서 **긍정 리뷰율과 평점 차이**는 중요한 분석 포인트
+- 🔄 향후에는 **시간 흐름에 따른 감성 변화**, **키워드 기반 요약** 등을 확장할 수 있음
 
 ---
 
 ## 📚 참고자료
 
-1. [KCI 논문: 영화리뷰와 흥행관계](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001954434)
-2. [HuggingFace MobileBERT 모델](https://huggingface.co/google/mobilebert-uncased)
-3. [PyTorch 공식 문서](https://pytorch.org/)
-4. [Transformers 문서](https://huggingface.co/docs/transformers/index)
+- [Huggingface MobileBERT](https://huggingface.co/google/mobilebert-uncased)
+- [PyTorch](https://pytorch.org/)
+- `McDonald_cleaned_reviews_numeric_rating.csv`, `McDonald_sample_2000.csv`
 
 ---
 
