@@ -38,6 +38,7 @@
 ## 4. 학습 과정 및 시각화
 
 학습 과정에서 기록한 손실과 정확도를 시각화하면 다음과 같습니다.
+mkdir images
 
 ![Loss and Accuracy over Epochs](./images/loss_accuracy_plot.png)
 
