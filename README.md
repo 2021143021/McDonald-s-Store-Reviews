@@ -4,120 +4,126 @@
 
 > 🔍 맥도날드 리뷰를 분석하여 지점별 고객 만족도를 예측하고, 실제 평점과 비교해 신뢰도를 평가합니다.
 
-![project-image](https://cdn.pixabay.com/photo/2020/05/06/17/49/feedback-5134141_1280.png)
+## 1. 프로젝트 개요
 
-<img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
-<img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
-<img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
-
----
-
-## 1. 개요
-
-고객 리뷰는 평점보다 훨씬 많은 정보를 담고 있습니다.  
-이번 프로젝트의 목적은 **텍스트 기반 감성 분석**을 통해  
-단순 평점에 숨겨진 고객의 진짜 반응을 파악하고,  
-이를 바탕으로 **지점별 리뷰 신뢰도**를 정량화하는 것입니다.
-
-✅ 감성 분석에는 **MobileBERT**를 활용하였고,  
-✅ 실제 리뷰 텍스트를 기반으로 **긍정/부정 이진 분류**를 수행했습니다.  
-✅ 그 결과를 기존 지점별 평점과 비교하여 **신뢰도 차이**를 시각화하였습니다.
+본 프로젝트는 MobileBERT 사전학습 모델을 활용하여 맥도날드 리뷰 데이터를 감성 분석(긍정/부정 분류)하는 모델을 구축하는 것을 목표로 합니다.  
+학습 데이터는 약 2,000개의 리뷰로 구성되며, 평점 4점 이상을 긍정, 1~2점을 부정으로 라벨링 하여 분류 모델을 학습시켰습니다.
 
 ---
 
-## 2. 데이터
+## 2. 데이터 설명 및 전처리
 
-### 📁 사용한 데이터셋
-
-| 파일명 | 설명 |
-|--------|------|
-| `McDonald_cleaned_reviews_numeric_rating.csv` | 전체 리뷰 및 평점 포함, 전처리 완료 |
-| `McDonald_sample_2000.csv` | 학습용 샘플 2,000건 추출 |
-
-### 🧪 데이터 구성
-
-- 총 리뷰 수: 약 **14,000건**
-- 평점 범위: **1~5점**
-- 라벨 정의:
-  - 1~2점: 부정 (0)
-  - 4~5점: 긍정 (1)
-  - 3점: 중립 (학습에서 제외)
-- 텍스트 길이 분포: **평균 100단어 내외**
-- 결측치: 텍스트 없는 리뷰는 제거됨
+- 데이터 파일: `McDonald_sample_2000.csv`  
+- 컬럼: `review` (텍스트), `rating` (평점)  
+- 중립 평점(3점) 및 결측치(`NaN`) 리뷰 제거  
+- 평점 기준 라벨 생성:  
+  - 긍정(1) : 평점 >= 4  
+  - 부정(0) : 평점 <= 2
 
 ---
 
-## 3. 학습 데이터 구축
+## 3. 모델 및 학습 설정
 
-학습용 데이터는 `McDonald_sample_2000.csv`에서 **긍정/부정만 필터링**하여 추출하였고,  
-리뷰 수는 다음과 같습니다.
-
-| 감성 라벨 | 수량 | 비율 |
-|-----------|------|------|
-| 긍정 (1) | 약 1,320 | 66% |
-| 부정 (0) | 약 680 | 34% |
-
-학습/검증은 **8:2 비율**로 나누어 진행하였습니다.
-
----
-
-## 4. MobileBERT Finetuning 결과
-
-### ⚙️ 모델 구성
-
-- 사전학습 모델: `google/mobilebert-uncased`
-- 프레임워크: `PyTorch`, `Transformers`
-- 최대 토큰 길이: 256
-- Optimizer: AdamW
-- Scheduler: Linear warmup
-- Epochs: 4  
-- Batch Size: 8  
-
-### 📈 학습 성능
-
-| Epoch | Train Loss | Train Acc | Val Acc |
-|-------|------------|-----------|---------|
-| 1 | 0.3852 | 83.8% | 82.0% |
-| 2 | 0.2773 | 89.0% | 85.6% |
-| 3 | 0.2115 | 92.4% | 86.3% |
-| 4 | 0.1689 | 94.5% | 87.0% |
-
-> 모델은 점진적으로 학습되었고, **검증 정확도는 87%** 수준으로 매우 양호했습니다.
+- 모델: `google/mobilebert-uncased` MobileBERT 기반 분류 모델  
+- 최대 토큰 길이: 256 (패딩 포함)  
+- 배치 사이즈: 8  
+- 옵티마이저: AdamW (learning rate=2e-5)  
+- 학습 에폭: 4  
+- 학습 데이터 80%, 검증 데이터 20% 분리  
+- 스케줄러: 선형 warm-up 스케줄러 사용  
+- GPU 환경에서 학습 수행  
 
 ---
 
-## 5. 지점별 평점 예측 및 신뢰도 분석
+## 4. 학습 과정 및 시각화
 
-전체 데이터셋에 대해 감성 분석을 수행한 후,  
-지점별로 **실제 평점**과 **예측된 긍정 리뷰 비율**을 비교했습니다.
+학습 과정에서 기록한 손실과 정확도를 시각화하면 다음과 같습니다.
 
-| 지점명 | 실제 평균 평점 | 예측 긍정 비율 | 신뢰도 평가 |
-|--------|----------------|----------------|--------------|
-| A지점 | 4.5 | 0.93 | 👍 매우 긍정적 |
-| B지점 | 3.2 | 0.52 | ⚠️ 보통 수준 |
-| C지점 | 2.7 | 0.38 | 🔻 신뢰도 낮음 |
+![Loss and Accuracy over Epochs](./images/loss_accuracy_plot.png)
 
-> 예측 감성 비율이 실제 평점보다 현저히 낮은 경우, **신뢰도에 의문**이 생깁니다.
+- **왼쪽 그래프**: 학습 손실(epoch별 평균) 감소 추세  
+- **오른쪽 그래프**: 학습 및 검증 정확도 상승 추세
 
 ---
 
-## 6. 결론 및 느낀점
+## 5. 평가 결과
 
-본 프로젝트를 통해 단순한 평점 기반 분석의 한계를 넘어서  
-**텍스트 리뷰 기반 감성 분석**의 가능성을 확인할 수 있었습니다.
+| Epoch | Train Loss | Train Accuracy | Validation Accuracy |
+|-------|------------|----------------|---------------------|
+| 1     | 0.5401     | 0.7650         | 0.7400              |
+| 2     | 0.3854     | 0.8475         | 0.8300              |
+| 3     | 0.2857     | 0.8950         | 0.8650              |
+| 4     | 0.2103     | 0.9250         | 0.8850              |
 
-- ✅ MobileBERT는 적은 데이터에서도 높은 성능을 보임
-- ✅ 리뷰 텍스트는 실제 평점보다 훨씬 풍부한 정보를 제공
-- ⚠️ 지점별 평가에서 **긍정 리뷰율과 평점 차이**는 중요한 분석 포인트
-- 🔄 향후에는 **시간 흐름에 따른 감성 변화**, **키워드 기반 요약** 등을 확장할 수 있음
-
----
-
-## 📚 참고자료
-
-- [Huggingface MobileBERT](https://huggingface.co/google/mobilebert-uncased)
-- [PyTorch](https://pytorch.org/)
-- `McDonald_cleaned_reviews_numeric_rating.csv`, `McDonald_sample_2000.csv`
+*※ 위 값들은 예시이며, 실제 학습 결과에 맞게 수정하세요.*
 
 ---
 
+## 6. 모델 저장 및 활용
+
+- 학습 완료된 모델은 `mobilebert_custom_model_mcdonald_sample2000` 디렉토리에 저장하였습니다.  
+- 저장된 모델은 `from_pretrained()` 메서드로 불러와 감성 예측에 바로 사용할 수 있습니다.  
+- 추론 예시:
+
+```python
+from transformers import MobileBertForSequenceClassification, MobileBertTokenizer
+import torch
+
+model = MobileBertForSequenceClassification.from_pretrained("mobilebert_custom_model_mcdonald_sample2000")
+tokenizer = MobileBertTokenizer.from_pretrained("google/mobilebert-uncased")
+
+text = "The fries were great but the service was slow."
+inputs = tokenizer(text, return_tensors="pt", max_length=256, padding="max_length", truncation=True)
+
+with torch.no_grad():
+    outputs = model(**inputs)
+    logits = outputs.logits
+    prediction = torch.argmax(logits, dim=1).item()
+print("긍정" if prediction == 1 else "부정")
+
+
+
+---
+
+## 2. 학습 결과 시각화용 Python 코드
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 실제 학습 종료 후 저장한 epoch_result 리스트 예시
+# epoch_result = [(train_loss1, train_acc1, val_acc1), (train_loss2, train_acc2, val_acc2), ...]
+epoch_result = [
+    (0.5401, 0.7650, 0.7400),
+    (0.3854, 0.8475, 0.8300),
+    (0.2857, 0.8950, 0.8650),
+    (0.2103, 0.9250, 0.8850)
+]
+
+train_losses = [x[0] for x in epoch_result]
+train_accs = [x[1] for x in epoch_result]
+val_accs = [x[2] for x in epoch_result]
+epochs = range(1, len(epoch_result) + 1)
+
+plt.figure(figsize=(12, 5))
+
+plt.subplot(1, 2, 1)
+plt.plot(epochs, train_losses, marker='o', color='blue', label='Train Loss')
+plt.title('Train Loss over Epochs')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.grid(True)
+plt.legend()
+
+plt.subplot(1, 2, 2)
+plt.plot(epochs, train_accs, marker='o', color='green', label='Train Accuracy')
+plt.plot(epochs, val_accs, marker='o', color='red', label='Validation Accuracy')
+plt.title('Accuracy over Epochs')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.grid(True)
+plt.legend()
+
+plt.tight_layout()
+plt.savefig('./images/loss_accuracy_plot.png')  # 프로젝트 폴더 내 images 폴더에 저장
+plt.show()
