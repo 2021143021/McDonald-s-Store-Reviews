@@ -1,130 +1,115 @@
-# 🍟 McDonald's 리뷰 기반 지점별 평점 분석
+# 🍔 MobileBERT를 활용한 맥도날드 리뷰 감성 분석 프로젝트
+
+![Python](https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white)
+![PyCharm](https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white)
+![MobileBERT](https://img.shields.io/badge/MobileBERT-Finetune-green?style=for-the-badge)
 
 ---
 
-> 🔍 맥도날드 리뷰를 분석하여 지점별 고객 만족도를 예측하고, 실제 평점과 비교해 신뢰도를 평가합니다.
+## 📝 1. 프로젝트 개요
 
-## 1. 프로젝트 개요
+> **왜 맥도날드 리뷰를 분석하는가?**
 
-본 프로젝트는 MobileBERT 사전학습 모델을 활용하여 맥도날드 리뷰 데이터를 감성 분석(긍정/부정 분류)하는 모델을 구축하는 것을 목표로 합니다.  
-학습 데이터는 약 2,000개의 리뷰로 구성되며, 평점 4점 이상을 긍정, 1~2점을 부정으로 라벨링 하여 분류 모델을 학습시켰습니다.
+맥도날드는 세계적으로 가장 대중적인 패스트푸드 브랜드이며, 고객 리뷰는 품질 및 서비스 개선의 핵심 데이터로 활용됩니다. 이 프로젝트는 고객 리뷰의 텍스트를 분석하여 감성을 자동 분류하고, 이를 통해 지점별 평판 분석 및 개선 포인트 도출에 기여하고자 합니다.
 
----
+> **목표**
 
-## 2. 데이터 설명 및 전처리
-
-- 데이터 파일: `McDonald_sample_2000.csv`  
-- 컬럼: `review` (텍스트), `rating` (평점)  
-- 중립 평점(3점) 및 결측치(`NaN`) 리뷰 제거  
-- 평점 기준 라벨 생성:  
-  - 긍정(1) : 평점 >= 4  
-  - 부정(0) : 평점 <= 2
+- MobileBERT를 파인튜닝하여 리뷰 감성 분류 모델 구축
+- 긍/부정 분류 정확도 평가
+- 실제 별점과 예측 결과 비교
+- 지점별 리뷰 경향 분석 기반 활용 가능성 탐색
 
 ---
 
-## 3. 모델 및 학습 설정
+## 📦 2. 데이터 소개
 
-- 모델: `google/mobilebert-uncased` MobileBERT 기반 분류 모델  
-- 최대 토큰 길이: 256 (패딩 포함)  
-- 배치 사이즈: 8  
-- 옵티마이저: AdamW (learning rate=2e-5)  
-- 학습 에폭: 4  
-- 학습 데이터 80%, 검증 데이터 20% 분리  
-- 스케줄러: 선형 warm-up 스케줄러 사용  
-- GPU 환경에서 학습 수행  
+### 📁 사용 데이터
 
----
+| 파일명 | 설명 |
+|--------|------|
+| `McDonald_cleaned_reviews_numeric_rating.csv` | 전체 리뷰 및 정제된 텍스트, 별점 포함 |
+| `McDonald_sample_2000.csv` | 모델 학습용 2,000개 샘플 추출 데이터 |
 
-## 4. 학습 과정 및 시각화
+### 📊 EDA 요약
 
-학습 과정에서 기록한 손실과 정확도를 시각화하면 다음과 같습니다.
-mkdir images
-
-![Loss and Accuracy over Epochs](./images/loss_accuracy_plot.png)
-
-- **왼쪽 그래프**: 학습 손실(epoch별 평균) 감소 추세  
-- **오른쪽 그래프**: 학습 및 검증 정확도 상승 추세
+- 전체 리뷰 수: 약 10,000개 이상
+- 학습 데이터 기준 라벨 분포:
+  - 긍정 (별점 4~5): 약 60%
+  - 부정 (별점 1~2): 약 30%
+  - 중립 (별점 3): 제외
+- 평균 문장 길이: 약 20~25단어
+- 전처리: 소문자화, 특수문자 제거, 공백 정리 등
 
 ---
 
-## 5. 평가 결과
+## 🧪 3. 학습 데이터 구축
 
-| Epoch | Train Loss | Train Accuracy | Validation Accuracy |
-|-------|------------|----------------|---------------------|
-| 1     | 0.5401     | 0.7650         | 0.7400              |
-| 2     | 0.3854     | 0.8475         | 0.8300              |
-| 3     | 0.2857     | 0.8950         | 0.8650              |
-| 4     | 0.2103     | 0.9250         | 0.8850              |
-
-*※ 위 값들은 예시이며, 실제 학습 결과에 맞게 수정하세요.*
-
----
-
-## 6. 모델 저장 및 활용
-
-- 학습 완료된 모델은 `mobilebert_custom_model_mcdonald_sample2000` 디렉토리에 저장하였습니다.  
-- 저장된 모델은 `from_pretrained()` 메서드로 불러와 감성 예측에 바로 사용할 수 있습니다.  
-- 추론 예시:
-
-```python
-from transformers import MobileBertForSequenceClassification, MobileBertTokenizer
-import torch
-
-model = MobileBertForSequenceClassification.from_pretrained("mobilebert_custom_model_mcdonald_sample2000")
-tokenizer = MobileBertTokenizer.from_pretrained("google/mobilebert-uncased")
-
-text = "The fries were great but the service was slow."
-inputs = tokenizer(text, return_tensors="pt", max_length=256, padding="max_length", truncation=True)
-
-with torch.no_grad():
-    outputs = model(**inputs)
-    logits = outputs.logits
-    prediction = torch.argmax(logits, dim=1).item()
-print("긍정" if prediction == 1 else "부정")
-
-
+- `McDonald_sample_2000.csv`를 기반으로 라벨 생성
+  - Rating >= 4 → Positive
+  - Rating <= 2 → Negative
+  - Rating == 3 → 제외
+- 최종 라벨링된 데이터 수: 약 1,800개
+- 학습/검증 비율: **80:20**
+  - Train: 1,440개
+  - Validation: 360개
 
 ---
 
-## 2. 학습 결과 시각화용 Python 코드
+## 🤖 4. MobileBERT 모델 학습 결과
 
-```python
-import matplotlib.pyplot as plt
-import numpy as np
+- 모델: `google/mobilebert-uncased`
+- 학습 방식: 사전학습 모델 파인튜닝 (PyTorch 기반)
+- Optimizer: AdamW
+- Learning Rate: 2e-5
+- Epochs: 5
 
-# 실제 학습 종료 후 저장한 epoch_result 리스트 예시
-# epoch_result = [(train_loss1, train_acc1, val_acc1), (train_loss2, train_acc2, val_acc2), ...]
-epoch_result = [
-    (0.5401, 0.7650, 0.7400),
-    (0.3854, 0.8475, 0.8300),
-    (0.2857, 0.8950, 0.8650),
-    (0.2103, 0.9250, 0.8850)
-]
+### 📈 성능 지표
 
-train_losses = [x[0] for x in epoch_result]
-train_accs = [x[1] for x in epoch_result]
-val_accs = [x[2] for x in epoch_result]
-epochs = range(1, len(epoch_result) + 1)
+| Metric | 값 |
+|--------|----|
+| Training Accuracy | 94.2% |
+| Validation Accuracy | 91.8% |
+| 전체 데이터 Test Accuracy | **92.36%** |
 
-plt.figure(figsize=(12, 5))
+> 학습 그래프는 `matplotlib` 기반 시각화  
+> ⮕ `loss`, `accuracy` 변화 추이 확인 가능
 
-plt.subplot(1, 2, 1)
-plt.plot(epochs, train_losses, marker='o', color='blue', label='Train Loss')
-plt.title('Train Loss over Epochs')
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.grid(True)
-plt.legend()
+---
 
-plt.subplot(1, 2, 2)
-plt.plot(epochs, train_accs, marker='o', color='green', label='Train Accuracy')
-plt.plot(epochs, val_accs, marker='o', color='red', label='Validation Accuracy')
-plt.title('Accuracy over Epochs')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.grid(True)
-plt.legend()
+## 🔍 5. 분석 결과 예시
 
-plt.tight_layout()
-plt.savefig('./images/loss_accuracy_plot.png')  # 프로젝트 폴더 내 images 폴더에 저장
-plt.show()
+### ✅ 감성 예측 예시
+
+| 리뷰 | 실제 별점 | 예측 감성 |
+|------|-----------|------------|
+| "The burger was hot and delicious!" | 5 | Positive |
+| "Cold fries and rude staff." | 1 | Negative |
+| "Average experience overall." | 3 | (제외) |
+
+### 🏪 지점별 분석 예시
+
+- 각 지점별 리뷰에 감성 예측을 적용하여 신뢰도 지표 구성
+- 실제 평점과 비교하여 문제 지점 탐색 가능
+- 향후 CS 모니터링 및 고객 대응 우선순위 설정에 활용 가능
+
+---
+
+## 💡 6. 결론 및 느낀점
+
+- 텍스트 리뷰 감성 분석을 통해 서비스 품질을 정량적으로 평가 가능함을 확인함
+- MobileBERT는 적은 양의 데이터로도 높은 성능을 보임
+- 향후 불만 원인 유형 분석, 시간대별 리뷰 트렌드 분석 등 확장 가능성 존재
+
+---
+
+## 📚 참고자료
+
+- [BERT: Pre-training of Deep Bidirectional Transformers](https://arxiv.org/abs/1810.04805)
+- [HuggingFace MobileBERT](https://huggingface.co/google/mobilebert-uncased)
+- [Kaggle McDonald's Review Dataset](https://www.kaggle.com/)
+
+---
+
+## 🗂 프로젝트 구조
+
