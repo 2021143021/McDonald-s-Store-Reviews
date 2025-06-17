@@ -120,34 +120,9 @@
 ├── McDonald_sample_2000.csv
 └── README.md
 
-import matplotlib.pyplot as plt
-
-epochs = [1, 2, 3, 4, 5]
-train_acc = [0.861, 0.903, 0.924, 0.935, 0.942]
-val_acc = [0.883, 0.901, 0.907, 0.913, 0.918]
-train_loss = [0.35, 0.26, 0.19, 0.14, 0.10]
-val_loss = [0.29, 0.23, 0.20, 0.18, 0.16]
-
-plt.figure(figsize=(10, 4))
-plt.subplot(1, 2, 1)
-plt.plot(epochs, train_acc, label='Train Accuracy', marker='o')
-plt.plot(epochs, val_acc, label='Validation Accuracy', marker='o')
-plt.title('Accuracy over Epochs')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.legend()
-plt.grid()
-
-plt.subplot(1, 2, 2)
-plt.plot(epochs, train_loss, label='Train Loss', marker='o')
-plt.plot(epochs, val_loss, label='Validation Loss', marker='o')
-plt.title('Loss over Epochs')
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.legend()
-plt.grid()
-
-plt.tight_layout()
-plt.savefig('train_val_accuracy_loss.png')
-plt.show()
+![Train & Validation Accuracy and Loss](https://github.com/사용자이름/리포지토리명/assets/train_val_accuracy_loss.png)
+<p align="center">
+  <img src="https://github.com/yourname/yourrepo/assets/train_accuracy.png" width="400"/>
+  <img src="https://github.com/yourname/yourrepo/assets/train_loss.png" width="400"/>
+</p>
 
