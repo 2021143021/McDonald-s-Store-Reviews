@@ -120,29 +120,34 @@
 ├── McDonald_sample_2000.csv
 └── README.md
 
-## 📉 학습 과정 시각화
+import matplotlib.pyplot as plt
 
-아래는 MobileBERT 모델을 5 에폭 동안 학습시킨 결과입니다.
+epochs = [1, 2, 3, 4, 5]
+train_acc = [0.861, 0.903, 0.924, 0.935, 0.942]
+val_acc = [0.883, 0.901, 0.907, 0.913, 0.918]
+train_loss = [0.35, 0.26, 0.19, 0.14, 0.10]
+val_loss = [0.29, 0.23, 0.20, 0.18, 0.16]
 
-| Epoch | Train Accuracy | Val Accuracy | Train Loss | Val Loss |
-|-------|----------------|--------------|------------|----------|
-| 1     | 86.1%          | 88.3%        | 0.35       | 0.29     |
-| 2     | 90.3%          | 90.1%        | 0.26       | 0.23     |
-| 3     | 92.4%          | 90.7%        | 0.19       | 0.20     |
-| 4     | 93.5%          | 91.3%        | 0.14       | 0.18     |
-| 5     | 94.2%          | 91.8%        | 0.10       | 0.16     |
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 2, 1)
+plt.plot(epochs, train_acc, label='Train Accuracy', marker='o')
+plt.plot(epochs, val_acc, label='Validation Accuracy', marker='o')
+plt.title('Accuracy over Epochs')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.grid()
 
-<br/>
+plt.subplot(1, 2, 2)
+plt.plot(epochs, train_loss, label='Train Loss', marker='o')
+plt.plot(epochs, val_loss, label='Validation Loss', marker='o')
+plt.title('Loss over Epochs')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+plt.grid()
 
-<p align="center">
-  <img src="https://github.com/your-username/your-repo/assets/train_val_accuracy_graph.png" width="480" />
-  <br/><i>Figure 1. 학습/검증 정확도 변화</i>
-</p>
-
-<p align="center">
-  <img src="https://github.com/your-username/your-repo/assets/train_val_loss_graph.png" width="480" />
-  <br/><i>Figure 2. 학습/검증 손실 변화</i>
-</p>
-
-> 정확도와 손실 모두 에폭이 증가함에 따라 점진적으로 안정되는 양상을 보이며, 모델의 일반화 성능이 양호함을 확인할 수 있음
+plt.tight_layout()
+plt.savefig('train_val_accuracy_loss.png')
+plt.show()
 
