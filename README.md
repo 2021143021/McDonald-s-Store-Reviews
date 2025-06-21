@@ -1,128 +1,143 @@
-# 🍔 MobileBERT를 활용한 맥도날드 리뷰 감성 분석 프로젝트
+# 🍔 MobileBERT와 함께한 맥도날드 리뷰 감정 분석 프로젝트
 
-![Python](https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white)
-![PyCharm](https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white)
-![MobileBERT](https://img.shields.io/badge/MobileBERT-Finetune-green?style=for-the-badge)
-
----
-
-## 📝 1. 프로젝트 개요
-
-> **왜 맥도날드 리뷰를 분석하는가?**
-
-맥도날드는 세계적으로 가장 대중적인 패스트푸드 브랜드이며, 고객 리뷰는 품질 및 서비스 개선의 핵심 데이터로 활용됩니다. 이 프로젝트는 고객 리뷰의 텍스트를 분석하여 감성을 자동 분류하고, 이를 통해 지점별 평판 분석 및 개선 포인트 도출에 기여하고자 합니다.
-
-> **목표**
-
-- MobileBERT를 파인튜닝하여 리뷰 감성 분류 모델 구축
-- 긍/부정 분류 정확도 평가
-- 실제 별점과 예측 결과 비교
-- 지점별 리뷰 경향 분석 기반 활용 가능성 탐색
-
----
-
-## 📦 2. 데이터 소개
-
-### 📁 사용 데이터
-
-| 파일명 | 설명 |
-|--------|------|
-| `McDonald_cleaned_reviews_numeric_rating.csv` | 전체 리뷰 및 정제된 텍스트, 별점 포함 |
-| `McDonald_sample_2000.csv` | 모델 학습용 2,000개 샘플 추출 데이터 |
-
-### 📊 EDA 요약
-
-- 전체 리뷰 수: 약 10,000개 이상
-- 학습 데이터 기준 라벨 분포:
-  - 긍정 (별점 4~5): 약 60% 만족스러운 경험
-  - 부정 (별점 1~2): 약 30% 	부정적인 경험이나 불만
-  - 중립 (별점 3): 	중립 또는 제외,주관적으로 애매하다고 판단됨
-- 평균 문장 길이: 약 20~25단어
-- 전처리: 소문자화, 특수문자 제거, 공백 정리 등
-
----
-
-## 🧪 3. 학습 데이터 구축
-
-- `McDonald_sample_2000.csv`를 기반으로 라벨 생성
-  - Rating >= 4 → Positive
-  - Rating <= 2 → Negative
-  - Rating == 3 → 제외
-- 최종 라벨링된 데이터 수: 약 1,800개
-- 학습/검증 비율: **80:20**
-  - Train: 1,440개
-  - Validation: 360개
-
----
-
-## 🤖 4. MobileBERT 모델 학습 결과
-
-- 모델: `google/mobilebert-uncased`
-- 학습 방식: 사전학습 모델 파인튜닝 (PyTorch 기반)
-- Optimizer: AdamW
-- Learning Rate: 2e-5
-- Epochs: 5
-
-### 📈 성능 지표
-
-| Metric | 값 |
-|--------|----|
-| Training Accuracy | 94.2% |
-| Validation Accuracy | 91.8% |
-| 전체 데이터 Test Accuracy | **92.36%** |
-
-> 학습 그래프는 `matplotlib` 기반 시각화  
-> ⮕ `loss`, `accuracy` 변화 추이 확인 가능
-
----
-
-## 🔍 5. 분석 결과 예시
-
-### ✅ 감성 예측 예시
-
-| 리뷰 | 실제 별점 | 예측 감성 |
-|------|-----------|------------|
-| "The burger was hot and delicious!" | 5 | Positive |
-| "Cold fries and rude staff." | 1 | Negative |
-| "Average experience overall." | 3 | (제외) |
-
-### 🏪 지점별 분석 예시
-
-- 각 지점별 리뷰에 감성 예측을 적용하여 신뢰도 지표 구성
-- 실제 평점과 비교하여 문제 지점 탐색 가능
-- 향후 CS 모니터링 및 고객 대응 우선순위 설정에 활용 가능
-
----
-
-## 💡 6. 결론 및 느낀점
-
-- 텍스트 리뷰 감성 분석을 통해 서비스 품질을 정량적으로 평가 가능함을 확인함
-- MobileBERT는 적은 양의 데이터로도 높은 성능을 보임
-- 향후 불만 원인 유형 분석, 시간대별 리뷰 트렌드 분석 등 확장 가능성 존재
-
----
-
-## 📚 참고자료
-
-- [BERT: Pre-training of Deep Bidirectional Transformers](https://arxiv.org/abs/1810.04805)
-- [HuggingFace MobileBERT](https://huggingface.co/google/mobilebert-uncased)
-- [Kaggle McDonald's Review Dataset](https://www.kaggle.com/)
-
----
-
-## 🗂 프로젝트 구조
-📁 McDonalds_Review_Analysis/
-├── 1_data_preprocessing.py # 데이터 정제 및 전처리
-├── 2_model_training.py # MobileBERT 모델 학습
-├── 3_inference_analysis.py # 예측 결과 분석 및 시각화
-├── McDonald_cleaned_reviews_numeric_rating.csv
-├── McDonald_sample_2000.csv
-└── README.md
-
-![Train & Validation Accuracy and Loss](https://github.com/사용자이름/리포지토리명/assets/train_val_accuracy_loss.png)
 <p align="center">
-  <img src="https://github.com/yourname/yourrepo/assets/train_accuracy.png" width="400"/>
-  <img src="https://github.com/yourname/yourrepo/assets/train_loss.png" width="400"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/McDonald%27s_Arch.svg/800px-McDonald%27s_Arch.svg.png" width="200"/>
 </p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
+  <img src="https://img.shields.io/badge/MobileBERT-transformers-green?style=for-the-badge" />
+</p>
+
+---
+
+## 1. 개요
+
+햄버거를 좋아하는 나는, 특히 맥도날드를 가장 선호한다.  
+피곤한 하루 끝에 먹는 맥도날드는 그야말로 해방감과 만족을 동시에 준다.  
+
+하지만 이건 나만의 경험일까?  
+세계적으로 가장 유명한 패스트푸드 체인인 **맥도날드에 대해 전 세계 사람들이 어떻게 느끼고 있는지** 궁금해졌다.
+
+그래서 본 프로젝트에서는 **전 세계 맥도날드 리뷰 데이터를 수집하고**,  
+MobileBERT 모델을 통해 **긍정/부정 감정 분류**를 수행하여,  
+- 사람들의 실제 감정이 별점과 얼마나 일치하는지
+- 부정적 리뷰가 많은 매장 또는 시점이 있는지  
+등을 분석해보고자 한다.
+
+---
+
+## 2. 데이터 속성 명세
+
+- **전체 리뷰 수**: 33,396건
+- **전처리 후 사용 데이터**: 28,570건 (3점 중립 제거 + NaN 제거)
+- **컬럼 정보**:
+  - `review`: 리뷰 텍스트  
+  - `rating`: 1~5점 별점
+  - `store_name`, `store_address`, `latitude`, `longitude` 등 위치 정보
+
+### 결측치 처리
+- `latitude`, `longitude`: 660건 NaN 제거
+- `review`: 12건 결측 제거
+
+### 평점 분포 (전처리 후)
+
+- 1점: 9,431건
+- 2점: 3,086건
+- 3점: 제거됨
+- 4점: 5,787건
+- 5점: 10,274건
+
+![평점 분포 그래프](./images/mcd_rating_distribution.png)
+
+### 라벨링 기준
+
+- **1~2점**: 부정 (label = 0)
+- **4~5점**: 긍정 (label = 1)
+- **3점**: 중립 → 분석에서 제외
+
+---
+
+## 3. 프로젝트 목적
+
+본 프로젝트의 궁극적인 목표는 다음과 같다:
+
+- 감정 분류 모델(MobileBERT)을 통해 맥도날드 리뷰를 **긍정/부정으로 자동 분류**
+- 텍스트 리뷰와 숫자 별점 사이의 **일관성**을 확인
+- 부정적인 리뷰가 많은 시점/지역 또는 공통 키워드 발견
+
+---
+
+## 4. 학습 데이터 구성
+
+### 샘플 데이터 기반 학습 (2,000건)
+
+- 전체 리뷰 중 중립/결측 제거 후 **무작위로 2,000건 샘플링**
+- 긍정/부정 라벨 비율 유지:
+  - 긍정: 1,113건
+  - 부정: 887건
+- 학습/검증 분리 (8:2): 1,600건 / 400건
+
+### 전체 데이터 기반 학습 (28,570건)
+
+- 전처리된 전체 데이터 사용
+- 학습/검증 분리 (8:2): 22,856건 / 5,714건
+
+---
+
+## 5. MobileBERT 학습 결과
+
+### 2,000건 샘플 데이터 학습 결과
+
+| Epoch | Train Loss | Train Acc | Val Acc |
+|-------|------------|-----------|---------|
+| 1     | 282444.82  | 91.81%    | 91.75%  |
+| 2     | 0.3823     | 95.75%    | 93.25%  |
+| 3     | 0.1786     | 97.06%    | 93.25%  |
+| 4     | 1.0507     | 97.25%    | 93.50%  |
+
+- 첫 Epoch는 이상치, 이후 정상 수렴
+- 최종 검증 정확도: **93.5%**
+
+### 전체 데이터 학습 결과
+
+| Epoch | Train Loss | Train Acc | Val Acc |
+|-------|------------|-----------|---------|
+| 1     | 18483.27   | 95.38%    | 93.65%  |
+| 2     | 0.4730     | 96.86%    | 94.33%  |
+| 3     | 0.2624     | 97.67%    | 94.96%  |
+| 4     | 0.1359     | 97.88%    | 95.03%  |
+
+- 전반적으로 **고정확도 + 안정적인 수렴**
+- 최종 검증 정확도: **95.03%**
+
+### 전체 데이터 예측 정확도 (추론 전용)
+
+- 학습된 모델로 전체 데이터(28,570건)를 예측한 결과:
+  - **Test Accuracy: 92.36%**
+
+---
+
+## 6. 결론 및 느낀점
+
+- **MobileBERT는 맥도날드 리뷰처럼 짧은 문장을 빠르고 정확히 분류하는 데 적합**
+- 일부 리뷰는 **긍정 점수인데 부정적인 내용**, 또는 그 반대인 경우도 많음 → 별점만으론 한계
+- **중립 리뷰 제외**는 단순화엔 도움이 되나, 감정 스펙트럼을 놓치는 단점 있음
+- 향후에는:
+  - 감정 다중 분류 (긍/부정/중립)
+  - 키워드 기반 이슈 분류
+  - 위치·시점·지점별 감정 편차 분석 등으로 확장 가능
+
+---
+
+## 🔗 참고 자료 및 도구
+
+- 🤖 [MobileBERT](https://huggingface.co/google/mobilebert-uncased) by Google
+- 🧠 [PyTorch](https://pytorch.org/)
+- 📚 데이터 출처:
+  - 자체 수집된 맥도날드 리뷰 데이터셋
+  - CSV 형태로 사전 전처리 완료
+
+---
 
