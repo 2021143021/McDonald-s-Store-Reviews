@@ -107,6 +107,13 @@
 MobileBERT는 맥도날드 리뷰의 긍/부정 감정을 매우 높은 정확도로 분류하는 데 성공했다.
 
 ---
+### 📈 Epoch별 손실 및 정확도 변화
+
+<p align="center">
+  <img src="./images/loss_plot.png" width="48%" />
+  <img src="./images/accuracy_plot.png" width="48%" />
+</p>
+
 
 ## 📌 결론 및 느낀 점
 
