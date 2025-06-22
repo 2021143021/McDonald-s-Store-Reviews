@@ -202,12 +202,10 @@
 ### 4.2️⃣ Epoch별 손실값 & 정확도 시각화
 
 <p align="center">
-  <img src="./images/sample_loss_plot.png" width="45%" alt="샘플 손실 그래프" />
-  <img src="./images/sample_acc_plot.png" width="45%" alt="샘플 정확도 그래프" />
+  <img src="./images/sample_loss_plot.png" width="45%" alt="샘플 손실 그래프" /> <img src="./images/sample_acc_plot.png" width="45%" alt="샘플 정확도 그래프" />
 </p>
 <p align="center">
-  <img src="./images/full_loss_plot.png" width="45%" alt="전체 손실 그래프" />
-  <img src="./images/full_acc_plot.png" width="45%" alt="전체 정확도 그래프" />
+  <img src="./images/full_loss_plot.png" width="45%" alt="전체 손실 그래프" /> <img src="./images/full_acc_plot.png" width="45%" alt="전체 정확도 그래프" />
 </p>
 
 📌 **분석 요약**  
