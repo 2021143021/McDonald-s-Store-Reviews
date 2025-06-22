@@ -158,9 +158,8 @@
 
 * 데이터 비율 분포
 
-<p align="center">
-  <img width="600" src="./images/train_data_distribution_compare.png" alt="학습 데이터 비율 분포 그래프">
-</p>
+ ![Image](https://github.com/user-attachments/assets/953f716f-c18b-4cc9-9f50-bf15c70cae03)
+
 
 - 첫 번째 데이터는 **감정 균형(1:1)**을 맞춰 모델 편향을 최소화하였다.  
 - 두 번째 데이터는 **원본 분포(55.8% vs 44.2%)**를 유지하여 현실 반영 성능을 평가하였다.  
