@@ -1,4 +1,4 @@
-## 🍔 MobileBERT를 활용한 맥도날드 리뷰 감정 분석 프로젝트  
+![1mcd_chart png](https://github.com/user-attachments/assets/8d6ff69d-754b-4a50-940a-dcb8e15a458c)## 🍔 MobileBERT를 활용한 맥도날드 리뷰 감정 분석 프로젝트  
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
@@ -100,7 +100,6 @@
 
 리뷰 평점 분포를 시각화하여 리뷰 데이터의 특성을 분석했다.
 
-![Uploading 1mcd_chart.png.png…]()
 
 
 - 4점과 5점의 긍정적 평점이 다수였으나, 1점과 2점의 부정적 평점도 무시할 수 없는 비율로 나타났다.
