@@ -25,12 +25,13 @@
 
 ### 리뷰 플랫폼 예시 이미지
 
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Google_reviews_logo.svg/2560px-Google_reviews_logo.svg.png" width="200" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Yelp_Logo.svg/2560px-Yelp_Logo.svg.png" width="200" />
-  ![trip](https://github.com/user-attachments/assets/2bcf8f9d-b14f-46b9-9830-130e4ff41190)
+![gool](https://github.com/user-attachments/assets/5cba9f83-3828-4bf3-919e-a35e82eacfa9)
 
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Yelp_Logo.svg/2560px-Yelp_Logo.svg.png" width="200" />
 </p>
+![trip](https://github.com/user-attachments/assets/02d4addb-1e16-4d68-adc2-2e7e6978b161)
+
 
 소비자들은 긍정적 리뷰를 통해 브랜드에 대한 신뢰를 형성하고, 부정적 리뷰를 통해 불만을 표출하거나 개선을 촉구한다. 따라서 기업 입장에서는 이 리뷰를 분석하고 관리하는 것이 필수적이다.
 
