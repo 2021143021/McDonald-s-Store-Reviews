@@ -1,9 +1,11 @@
-# 🍔 맥도날드 리뷰 감정 분석 프로젝트 - MobileBERT 기반
+## 🍔 MobileBERT를 활용한 맥도날드 리뷰 감정 분석 프로젝트  
 
-<p align="center"><img src="1mcd_chart.png" /><img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" /><img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" /><p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/>
+  <img src="https://img.shields.io/badge/PyCharm-000000?style=for-the-badge&logo=pycharm&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white"/>
 </p>
-
----![1mcd_chart png](https://github.com/user-attachments/assets/bad63a0f-4384-4c38-a401-7253942061db)
 
 
 ## 📌 1. 개요
