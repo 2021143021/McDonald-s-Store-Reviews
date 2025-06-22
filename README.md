@@ -224,12 +224,37 @@
 
 ### 4.3 전체 데이터셋 Inference 결과
 
-- 전체 28,570건에 대해 학습된 모델을 적용하여 **Test Accuracy: 92.36%** 를 달성하였다.
+| 첫 번째 모델 (샘플 데이터 기반) Inference | 두 번째 모델 (전체 데이터 기반) Inference |
+|:-----------------------------------------:|:-----------------------------------------:|
+| ```text                                  
+Test step : 11702/11710, Temp Accuracy : 0.75
+Test step : 11703/11710, Temp Accuracy : 0.50
+Test step : 11704/11710, Temp Accuracy : 0.75
+Test step : 11705/11710, Temp Accuracy : 0.875
+Test step : 11706/11710, Temp Accuracy : 0.75
+Test step : 11707/11710, Temp Accuracy : 0.875
+Test step : 11708/11710, Temp Accuracy : 0.75
+Test step : 11709/11710, Temp Accuracy : 0.75
+Test step : 11710/11710, Temp Accuracy : 0.8571
+Total Accuracy : 0.8918
+Process finished with exit code 0
+``` | ```text                                  
+Test step : 11702/11710, Temp Accuracy : 1.00
+Test step : 11703/11710, Temp Accuracy : 1.00
+Test step : 11704/11710, Temp Accuracy : 0.875
+Test step : 11705/11710, Temp Accuracy : 0.875
+Test step : 11706/11710, Temp Accuracy : 0.75
+Test step : 11707/11710, Temp Accuracy : 0.75
+Test step : 11708/11710, Temp Accuracy : 0.875
+Test step : 11709/11710, Temp Accuracy : 0.875
+Test step : 11710/11710, Temp Accuracy : 1.00
+Total Accuracy : 0.8648
+Process finished with exit code 0
+``` |
 
-```python
-# 예시 출력
-print(f"전체 리뷰 데이터에 대한 MobileBERT 정확도: {test_accuracy:.4f}")
-# => 전체 리뷰 데이터에 대한 MobileBERT 정확도: 0.9236
+- 첫 번째 모델은 샘플 기반 학습 데이터에서 **Total Accuracy: 89.18%** 를 달성하였다.  
+- 두 번째 모델은 전체 데이터 기반 학습에서 **Total Accuracy: 86.48%** 를 달성하였다.  
+- 학습 과정의 안정성과 과적합 여부를 고려했을 때, 첫 번째 모델이 더 안정적인 학습 곡선을 보였다.
 
 
 
