@@ -166,5 +166,75 @@
 - 두 방식을 비교 분석하여 모델의 일반화 성능과 현실 반영 성능을 모두 확인하였다.
 
 
+## 4. MobileBERT 학습 결과
+
+### 개발 환경
+
+<p align="center">
+  <img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
+  <img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
+</p>
+
+### 사용 패키지
+
+<p align="center">
+  <img src="https://img.shields.io/badge/pandas-%23150458.svg?&style=for-the-badge&logo=pandas&logoColor=white" />
+  <img src="https://img.shields.io/badge/transformers-%23E04CFF.svg?&style=for-the-badge&logo=transformers&logoColor=white" />
+  <img src="https://img.shields.io/badge/numpy-%23013243.svg?&style=for-the-badge&logo=numpy&logoColor=white" />
+</p>
+
+---
+
+### 4.1 샘플 데이터(2,000건) 기반 Fine-tuning
+
+- 학습 데이터: 1,600건 (긍정 896 / 부정 704)  
+- 검증 데이터: 400건 (긍정 224 / 부정 176)
+
+| Epoch | Training Loss | Training Accuracy | Validation Accuracy |
+|-------|---------------|-------------------|---------------------|
+| 1     | 282,444.82    | 91.81%            | 91.75%              |
+| 2     | 0.3823        | 95.75%            | 93.25%              |
+| 3     | 0.1786        | 97.06%            | 93.25%              |
+| 4     | 1.0507        | 97.25%            | 93.50%              |
+
+<p align="center">
+  <img src="./images/sample_loss_plot.png" width="45%" alt="샘플 데이터 Loss Plot" />
+  <img src="./images/sample_acc_plot.png"  width="45%" alt="샘플 데이터 Accuracy Plot" />
+</p>
+
+---
+
+### 4.2 전체 데이터(28,570건) 기반 Fine-tuning
+
+- 학습 데이터: 22,856건  
+- 검증 데이터: 5,714건
+
+| Epoch | Training Loss | Training Accuracy | Validation Accuracy |
+|-------|---------------|-------------------|---------------------|
+| 1     | 18,483.27     | 95.38%            | 93.65%              |
+| 2     | 0.4730        | 96.86%            | 94.33%              |
+| 3     | 0.2624        | 97.67%            | 94.96%              |
+| 4     | 0.1359        | 97.88%            | 95.03%              |
+
+<p align="center">
+  <img src="./images/full_loss_plot.png" width="45%" alt="전체 데이터 Loss Plot" />
+  <img src="./images/full_acc_plot.png"  width="45%" alt="전체 데이터 Accuracy Plot" />
+</p>
+
+---
+
+### 4.3 전체 데이터셋 Inference 결과
+
+- 전체 28,570건 리뷰에 대해 학습된 모델로 Inference를 수행하였다.  
+- **Test Accuracy**: **92.36%**
+
+```python
+# 예시 출력
+print(f"전체 리뷰 데이터에 대한 MobileBERT 정확도: {test_accuracy:.4f}")
+# => 전체 리뷰 데이터에 대한 MobileBERT 정확도: 0.9236
+
+
+
 
 
