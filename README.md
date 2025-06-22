@@ -26,15 +26,11 @@
 ### 리뷰 플랫폼 예시 이미지
 
 <p align="center">
-  <img src="images/google_logo.png" width="200" alt="Google Reviews Logo" />
-  <img src="images/yelp_logo.svg" width="200" alt="Yelp Logo" />
-  <img src="images/tripadvisor_logo.png" width="200" alt="TripAdvisor Logo" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Yelp_Logo.svg/2560px-Yelp_Logo.svg.png" width="200" />
 </p>
 
-
-
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Yelp_Logo.svg/2560px-Yelp_Logo.svg.png" width="200" />
+  <img src="[https://i.imgur.com/abcd123.png](https://imgur.com/a/aHHzwan)" width="300" alt="Review Platforms"/>
 </p>
 
 
