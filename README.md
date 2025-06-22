@@ -30,7 +30,7 @@
 </p>
 
 <p align="center">
-  <img src="[https://i.imgur.com/abcd123.png](https://imgur.com/a/aHHzwan)" width="300" alt="Review Platforms"/>
+  <img src="https://imgur.com/a/aHHzwan" width="300" alt="Review Platforms"/>
 </p>
 
 
