@@ -30,10 +30,11 @@
 
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Yelp_Logo.svg/2560px-Yelp_Logo.svg.png" width="300" />
+  ![trip](https://github.com/user-attachments/assets/af3c767a-e62b-4f74-ba2c-5e89ff1a2d53)
 </p>
 
 
-![trip](https://github.com/user-attachments/assets/af3c767a-e62b-4f74-ba2c-5e89ff1a2d53)
+
 
 
 소비자들은 긍정적 리뷰를 통해 브랜드에 대한 신뢰를 형성하고, 부정적 리뷰를 통해 불만을 표출하거나 개선을 촉구한다. 따라서 기업 입장에서는 이 리뷰를 분석하고 관리하는 것이 필수적이다.
