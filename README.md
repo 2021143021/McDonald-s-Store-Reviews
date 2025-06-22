@@ -1,7 +1,7 @@
 # 🍔 맥도날드 리뷰 감정 분석 프로젝트 - MobileBERT 기반
 
 <p align="center">
-  <img src="C:\맥날 리뷰 평점 분포 그래프.png" width="150"/>
+  <img src="C:\1mcd_chart.png" width="150"/>
 </p>
 
 ---
