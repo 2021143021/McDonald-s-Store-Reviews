@@ -100,7 +100,8 @@
 
 리뷰 평점 분포를 시각화하여 리뷰 데이터의 특성을 분석했다.
 
-![1mcd_chart png](https://github.com/user-attachments/assets/42d5c678-8479-4fe1-b143-9ca7af29cc26)
+![Uploading 1mcd_chart.png.png…]()
+
 
 - 4점과 5점의 긍정적 평점이 다수였으나, 1점과 2점의 부정적 평점도 무시할 수 없는 비율로 나타났다.
 
@@ -114,7 +115,8 @@
 | 최대 길이 | 2,000자 이상      |
 | 평균 길이 | 약 255자          |
 
-![3mcd_chart](https://github.com/user-attachments/assets/94363058-f77f-4955-92d4-b1d118436b80)
+
+![Uploading 3mcd_chart.png…]()
 
 
 - 리뷰의 대부분은 간략하고 짧게 작성되었으며 평균 약 255자였다.
