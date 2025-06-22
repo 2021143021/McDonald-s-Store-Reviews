@@ -168,14 +168,14 @@
 
 ## 4. MobileBERT 학습 결과
 
-### 개발 환경
+### 🛠 개발환경
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
 </p>
 
-### 사용 패키지
+### 📦 사용 패키지
 
 <p align="center">
   <img src="https://img.shields.io/badge/pandas-%23150458.svg?&style=for-the-badge&logo=pandas&logoColor=white" />
@@ -186,75 +186,41 @@
 
 ---
 
-### 4.1 샘플 데이터 (2,000건) Fine-tuning 결과
+### 4.1️⃣ 학습 결과
 
-- 학습 데이터: 1,600건 (긍정 896 / 부정 704)  
-- 검증 데이터: 400건 (긍정 224 / 부정 176)
-
-| 지표                 | Epoch | 0         | 1       | 2       | 3       |
-|----------------------|-------|-----------|---------|---------|---------|
-| **Training Loss**    |       | 282,444.82| 0.3823  | 0.1786  | 1.0507  |
-| **Train Accuracy**   |       | 91.81%    | 95.75%  | 97.06%  | 97.25%  |
-| **Validation Acc.**  |       | 91.75%    | 93.25%  | 93.25%  | 93.50%  |
-
-<p align="center">
-  <img src="./images/sample_loss_plot.png" width="45%" alt="샘플 데이터 Train Loss" />
-  <img src="./images/sample_acc_plot.png"  width="45%" alt="샘플 데이터 Accuracy" />
-</p>
+| 구분               | Epoch | 0          | 1       | 2       | 3       |
+|--------------------|-------|------------|---------|---------|---------|
+| **첫 번째 데이터** |       |            |         |         |         |
+| ‣ Training Loss    |       | 7.4573e+4  | 0.59    | 0.25    | 0.23    |
+| ‣ Validation Acc.  |       | 0.84       | 0.86    | 0.86    | 0.87    |
+| **두 번째 데이터** |       |            |         |         |         |
+| ‣ Training Loss    |       | 1.3910e+4  | 0.32    | 0.23    | 0.36    |
+| ‣ Validation Acc.  |       | 0.76       | 0.89    | 0.87    | 0.89    |
 
 ---
 
-### 4.2 전체 데이터 (28,570건) Fine-tuning 결과
-
-- 학습 데이터: 22,856건  
-- 검증 데이터: 5,714건
-
-| 지표                 | Epoch | 0        | 1       | 2       | 3       |
-|----------------------|-------|----------|---------|---------|---------|
-| **Training Loss**    |       | 18,483.27| 0.4730  | 0.2624  | 0.1359  |
-| **Train Accuracy**   |       | 95.38%   | 96.86%  | 97.67%  | 97.88%  |
-| **Validation Acc.**  |       | 93.65%   | 94.33%  | 94.96%  | 95.03%  |
+### 4.2️⃣ 에포크별 손실값 & 정확도 변화
 
 <p align="center">
-  <img src="./images/full_loss_plot.png" width="45%" alt="전체 데이터 Train Loss" />
-  <img src="./images/full_acc_plot.png"  width="45%" alt="전체 데이터 Accuracy" />
+  <img src="./images/epoch_loss_acc.png" width="1076" alt="Epoch별 손실 및 정확도 변화 그래프" />
 </p>
+
+첫 번째 모델은 초기 Training Loss가 높지만 빠르게 감소하며 안정된 성능을 보인다.  
+두 번째 모델은 초기 학습이 빠르지만 후반에 과적합 징후를 보여, 안정성 측면에서는 첫 번째 모델이 더 우수하다.
 
 ---
 
-### 4.3 전체 데이터셋 Inference 결과
+### 4.3️⃣ 학습 모델을 원본 데이터에 적용한 결과값
 
-| 첫 번째 모델 (샘플 데이터 기반) Inference | 두 번째 모델 (전체 데이터 기반) Inference |
-|:-----------------------------------------:|:-----------------------------------------:|
-| ```text                                  
-Test step : 11702/11710, Temp Accuracy : 0.75
-Test step : 11703/11710, Temp Accuracy : 0.50
-Test step : 11704/11710, Temp Accuracy : 0.75
-Test step : 11705/11710, Temp Accuracy : 0.875
-Test step : 11706/11710, Temp Accuracy : 0.75
-Test step : 11707/11710, Temp Accuracy : 0.875
-Test step : 11708/11710, Temp Accuracy : 0.75
-Test step : 11709/11710, Temp Accuracy : 0.75
-Test step : 11710/11710, Temp Accuracy : 0.8571
-Total Accuracy : 0.8918
-Process finished with exit code 0
-``` | ```text                                  
-Test step : 11702/11710, Temp Accuracy : 1.00
-Test step : 11703/11710, Temp Accuracy : 1.00
-Test step : 11704/11710, Temp Accuracy : 0.875
-Test step : 11705/11710, Temp Accuracy : 0.875
-Test step : 11706/11710, Temp Accuracy : 0.75
-Test step : 11707/11710, Temp Accuracy : 0.75
-Test step : 11708/11710, Temp Accuracy : 0.875
-Test step : 11709/11710, Temp Accuracy : 0.875
-Test step : 11710/11710, Temp Accuracy : 1.00
-Total Accuracy : 0.8648
-Process finished with exit code 0
-``` |
+<p align="center">
+  <img src="./images/inference_results.png" width="727" alt="학습 모델 원본 데이터 적용 결과 스크린샷" />
+</p>
 
-- 첫 번째 모델은 샘플 기반 학습 데이터에서 **Total Accuracy: 89.18%** 를 달성하였다.  
-- 두 번째 모델은 전체 데이터 기반 학습에서 **Total Accuracy: 86.48%** 를 달성하였다.  
-- 학습 과정의 안정성과 과적합 여부를 고려했을 때, 첫 번째 모델이 더 안정적인 학습 곡선을 보였다.
+- **첫 번째 모델** (샘플 기반) Total Accuracy: **89.18%**  
+- **두 번째 모델** (전체 데이터 기반) Total Accuracy: **86.48%**  
+
+과적합 여부와 안정성을 고려했을 때, 첫 번째 모델이 더 나은 성능을 보인다.
+
 
 
 
