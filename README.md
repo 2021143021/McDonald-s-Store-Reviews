@@ -166,121 +166,65 @@
 - 두 방식을 비교 분석하여 모델의 일반화 성능과 현실 반영 성능을 모두 확인하였다.
 
 
-## 4. 🤖MobileBERT 학습 결과
+## 4. 📊 MobileBERT 학습 결과
 
-### 🛠 개발환경
+---
 
-<p align="center">
-  <img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
-</p>
+### 💻 개발환경
+
+<img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
+<img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
 
 ### 📦 사용 패키지
 
-<p align="center">
-  <img src="https://img.shields.io/badge/pandas-%23150458.svg?&style=for-the-badge&logo=pandas&logoColor=white" />
-  <img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
-  <img src="https://img.shields.io/badge/transformers-%23E04CFF.svg?&style=for-the-badge&logo=transformers&logoColor=white" />
-  <img src="https://img.shields.io/badge/numpy-%23013243.svg?&style=for-the-badge&logo=numpy&logoColor=white" />
-</p>
+<img src="https://img.shields.io/badge/pandas-%23150458.svg?&style=for-the-badge&logo=pandas&logoColor=white" />
+<img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
+<img src="https://img.shields.io/badge/tensorflow-%23FF6F00.svg?&style=for-the-badge&logo=tensorflow&logoColor=white" />
+<img src="https://img.shields.io/badge/numpy-%23013243.svg?&style=for-the-badge&logo=numpy&logoColor=white" />
 
 ---
 
-### 4.1️⃣ 첫 번째 실험 (2,000건 샘플 데이터)
+### 4.1️⃣ 실험 결과 비교
 
-| Epoch | Train Loss     | Train Accuracy | Validation Accuracy |
-|:-----:|:---------------|:---------------|:-------------------:|
-| 1     | 282,444.8209   | 91.81%         | 91.75%              |
-| 2     | 0.3823         | 95.75%         | 93.25%              |
-| 3     | 0.1786         | 97.06%         | 93.25%              |
-| 4     | 1.0507         | 97.25%         | 93.50%              |
-
-<p align="center">
-  <img src="./images/sample_loss_plot.png" width="45%" alt="샘플 데이터 손실 그래프" />
-  <img src="./images/sample_acc_plot.png"  width="45%" alt="샘플 데이터 정확도 그래프" />
-</p>
+| 학습 데이터 종류     | Epoch | Train Loss       | Train Accuracy | Validation Accuracy |
+|----------------------|:-----:|------------------|----------------|----------------------|
+| **첫 번째 실험** (2,000건 샘플) | 1     | 282,444.8209     | 91.81%         | 91.75%               |
+|                              | 2     | 0.3823           | 95.75%         | 93.25%               |
+|                              | 3     | 0.1786           | 97.06%         | 93.25%               |
+|                              | 4     | 1.0507           | 97.25%         | 93.50%               |
+| **두 번째 실험** (2,857건 비율 샘플) | 1     | 18,483.2734      | 95.38%         | 93.65%               |
+|                              | 2     | 0.4730           | 96.86%         | 94.33%               |
+|                              | 3     | 0.2624           | 97.67%         | 94.96%               |
+|                              | 4     | 0.1359           | 97.88%         | 95.03%               |
 
 ---
 
-### 4.2️⃣ 두 번째 실험 (28,570건 전체 데이터)
-
-| Epoch | Train Loss   | Train Accuracy | Validation Accuracy |
-|:-----:|:-------------|:---------------|:-------------------:|
-| 1     | 18,483.2734  | 95.38%         | 93.65%              |
-| 2     | 0.4730       | 96.86%         | 94.33%              |
-| 3     | 0.2624       | 97.67%         | 94.96%              |
-| 4     | 0.1359       | 97.88%         | 95.03%              |
+### 4.2️⃣ Epoch별 손실값 & 정확도 시각화
 
 <p align="center">
-  <img src="./images/full_loss_plot.png" width="45%" alt="전체 데이터 손실 그래프" />
-  <img src="./images/full_acc_plot.png"  width="45%" alt="전체 데이터 정확도 그래프" />
+  <img src="./images/sample_loss_plot.png" width="45%" alt="샘플 손실 그래프" />
+  <img src="./images/sample_acc_plot.png" width="45%" alt="샘플 정확도 그래프" />
 </p>
+<p align="center">
+  <img src="./images/full_loss_plot.png" width="45%" alt="전체 손실 그래프" />
+  <img src="./images/full_acc_plot.png" width="45%" alt="전체 정확도 그래프" />
+</p>
+
+📌 **분석 요약**  
+- 첫 번째 모델은 학습 초기 Loss가 크지만, 빠르게 감소하며 안정적인 학습곡선을 보임.  
+- 두 번째 모델은 초기 성능은 뛰어나나 후반부에 과적합 가능성이 보임.  
+- 두 모델 모두 우수한 정확도를 기록했으나, **첫 번째 모델이 더 안정적인 학습 결과**를 보였음.
 
 ---
 
 ### 4.3️⃣ 전체 데이터셋 Inference 결과
 
-- **Test Accuracy:** 92.36%  
-  (샘플 기반 모델을 전체 28,570건에 적용하여 평가)
+- 전체 리뷰 **28,570건**에 대해 MobileBERT 모델을 적용한 결과:
 
 ```text
 Using device: cuda
 ...
 전체 리뷰 데이터에 대한 MobileBERT 정확도: 0.9236
 Process finished with exit code 0
-
-
-
-## 4. 🤖 MobileBERT Finetuning 결과
-
-### 🛠 개발 환경
-
-<img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
-<img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
-
-### 📦 주요 패키지
-
-<img src="https://img.shields.io/badge/pandas-%23150458.svg?&style=for-the-badge&logo=pandas&logoColor=white" />
-<img src="https://img.shields.io/badge/numpy-%23013243.svg?&style=for-the-badge&logo=numpy&logoColor=white" />
-<img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
-<img src="https://img.shields.io/badge/tensorflow-%23FF6F00.svg?&style=for-the-badge&logo=tensorflow&logoColor=white" />
-
----
-
-### 4.1️⃣ 학습 결과 비교
-
-| **첫 번째 학습 데이터** | Epoch | 0 | 1 | 2 | 3 | **두 번째 학습 데이터** | Epoch | 0 | 1 | 2 | 3 |
-|--------------------------|--------|--------|--------|--------|--------|---------------------------|--------|--------|--------|--------|--------|
-| Training Loss            | 7.4573e+4 | 0.59 | 0.25 | 0.23 | Training Loss             | 1.3910e+4 | 0.32 | 0.23 | 0.36 |
-| Validation Accuracy      | 0.84 | 0.86 | 0.86 | 0.87 | Validation Accuracy       | 0.76 | 0.89 | 0.87 | 0.89 |
-
-📊 시각화 그래프:  
-<p align="center">
-  <img width="600" src="./images/training_result_graph.png" alt="MobileBERT Training Result">
-</p>
-
-- 첫 번째 모델은 초기 Training Loss가 높았으나 빠르게 감소하여 **안정적인 성능**을 보였다.  
-- 두 번째 모델은 빠르게 학습되었지만, 후반에 **과적합의 가능성**을 보인다.  
-- 결과적으로 첫 번째 모델이 **더 안정적인 학습 곡선**을 보여주었다.
-
----
-
-### 4.2️⃣ 전체 데이터셋 Inference 결과
-
-- 학습된 모델을 전체 리뷰 데이터(28,570건)에 적용한 결과는 다음과 같다.
-
-```
-Using device: cuda
-전체 리뷰 데이터에 대한 MobileBERT 정확도: 0.9236
-Process finished with exit code 0
-```
-
-✅ **최종 Test Accuracy: 92.36%**
-
-📌 전체 리뷰를 기준으로 학습된 모델의 **일반화 성능이 매우 높음**을 확인할 수 있다.
-
-
-
-
 
 
