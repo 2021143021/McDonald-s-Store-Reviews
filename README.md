@@ -129,7 +129,8 @@
 이는 맥도날드의 서비스 품질 개선을 위해 부정적인 의견에 주목할 필요가 있음을 시사한다.
 
 <p align="center">
-  <img width="500" src="./images/review_sentiment_distribution.png" alt="리뷰 감정 분포 그래프">
+  <img width="500" src="<img src="https://github.com/username/repo/blob/main/images/review_sentiment_distribution.png?raw=true" width="500" />
+" alt="리뷰 감정 분포 그래프">
 </p>
 
 - 👍 긍정 리뷰: 약 55.8%  
