@@ -1,7 +1,6 @@
 # 🍔 맥도날드 리뷰 감정 분석 프로젝트 - MobileBERT 기반
 
-<p align="center">
-  <img src="C:\1mcd_chart.png" width="150"/>
+<p align="center"><img src="1mcd_chart.png" /><img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" /><img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" /><p>
 </p>
 
 ---
