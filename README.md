@@ -1,4 +1,4 @@
-![1mcd_chart png](https://github.com/user-attachments/assets/8d6ff69d-754b-4a50-940a-dcb8e15a458c)## 🍔 MobileBERT를 활용한 맥도날드 리뷰 감정 분석 프로젝트  
+## 🍔 MobileBERT를 활용한 맥도날드 리뷰 감정 분석 프로젝트  
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
