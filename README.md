@@ -12,7 +12,10 @@
 
 ### 1.1 맥도날드와 글로벌 패스트푸드 산업의 성장
 
-1955년 미국 일리노이주에 첫 매장을 연 이후, 맥도날드는 패스트푸드 업계의 선두주자로 자리 잡으며 전 세계적으로 빠르게 성장했다. 특히 20세기 후반부터 글로벌화가 가속화되면서 맥도날드는 빠르고 표준화된 서비스로 전 세계인의 일상생활 속에 깊숙이 자리 잡았다. 오늘날 맥도날드는 전 세계 100여 개 이상의 국가에서 3만 개 이상의 매장을 운영하고 있으며, 전 세계 패스트푸드 시장 점유율의 상당 부분을 차지하고 있다.![mcd](https://github.com/user-attachments/assets/eab741d3-901f-4710-b21e-844f2688ffb2)
+1955년 미국 일리노이주에 첫 매장을 연 이후, 맥도날드는 패스트푸드 업계의 선두주자로 자리 잡으며 전 세계적으로 빠르게 성장했다. 특히 20세기 후반부터 글로벌화가 가속화되면서 맥도날드는 빠르고 표준화된 서비스로 전 세계인의 일상생활 속에 깊숙이 자리 잡았다. 오늘날 맥도날드는 전 세계 100여 개 이상의 국가에서 3만 개 이상의 매장을 운영하고 있으며, 전 세계 패스트푸드 시장 점유율의 상당 부분을 차지하고 있다.
+
+
+![mcd](https://github.com/user-attachments/assets/eab741d3-901f-4710-b21e-844f2688ffb2)
 
 
 [참고 자료](https://www.mcdonalds.com/us/en-us/about-us.html)
@@ -27,10 +30,6 @@
 
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Yelp_Logo.svg/2560px-Yelp_Logo.svg.png" width="200" />
-</p>
-
-<p align="center">
-  <img src="https://imgur.com/a/aHHzwan" width="300" alt="Review Platforms"/>
 </p>
 
 
