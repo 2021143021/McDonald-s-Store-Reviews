@@ -128,10 +128,7 @@
 긍정 리뷰가 전체의 약 55.8%를 차지하며 우세했지만, 부정 리뷰 또한 44.2%로 적지 않은 비중을 보였다.  
 이는 맥도날드의 서비스 품질 개선을 위해 부정적인 의견에 주목할 필요가 있음을 시사한다.
 
-<p align="center">
-  <img width="500" src="<img src="https://github.com/username/repo/blob/main/images/review_sentiment_distribution.png?raw=true" width="500" />
-" alt="리뷰 감정 분포 그래프">
-</p>
+![Image](https://github.com/user-attachments/assets/5db01e04-a827-459f-89aa-feef3109cc1c)
 
 - 👍 긍정 리뷰: 약 55.8%  
 - 👎 부정 리뷰: 약 44.2%
