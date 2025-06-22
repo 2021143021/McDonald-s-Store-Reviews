@@ -166,7 +166,7 @@
 - 두 방식을 비교 분석하여 모델의 일반화 성능과 현실 반영 성능을 모두 확인하였다.
 
 
-## 4. MobileBERT 학습 결과
+## 4. 🤖MobileBERT 학습 결과
 
 ### 🛠 개발환경
 
@@ -228,6 +228,57 @@ Using device: cuda
 ...
 전체 리뷰 데이터에 대한 MobileBERT 정확도: 0.9236
 Process finished with exit code 0
+
+
+
+## 4. 🤖 MobileBERT Finetuning 결과
+
+### 🛠 개발 환경
+
+<img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
+<img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
+
+### 📦 주요 패키지
+
+<img src="https://img.shields.io/badge/pandas-%23150458.svg?&style=for-the-badge&logo=pandas&logoColor=white" />
+<img src="https://img.shields.io/badge/numpy-%23013243.svg?&style=for-the-badge&logo=numpy&logoColor=white" />
+<img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
+<img src="https://img.shields.io/badge/tensorflow-%23FF6F00.svg?&style=for-the-badge&logo=tensorflow&logoColor=white" />
+
+---
+
+### 4.1️⃣ 학습 결과 비교
+
+| **첫 번째 학습 데이터** | Epoch | 0 | 1 | 2 | 3 | **두 번째 학습 데이터** | Epoch | 0 | 1 | 2 | 3 |
+|--------------------------|--------|--------|--------|--------|--------|---------------------------|--------|--------|--------|--------|--------|
+| Training Loss            | 7.4573e+4 | 0.59 | 0.25 | 0.23 | Training Loss             | 1.3910e+4 | 0.32 | 0.23 | 0.36 |
+| Validation Accuracy      | 0.84 | 0.86 | 0.86 | 0.87 | Validation Accuracy       | 0.76 | 0.89 | 0.87 | 0.89 |
+
+📊 시각화 그래프:  
+<p align="center">
+  <img width="600" src="./images/training_result_graph.png" alt="MobileBERT Training Result">
+</p>
+
+- 첫 번째 모델은 초기 Training Loss가 높았으나 빠르게 감소하여 **안정적인 성능**을 보였다.  
+- 두 번째 모델은 빠르게 학습되었지만, 후반에 **과적합의 가능성**을 보인다.  
+- 결과적으로 첫 번째 모델이 **더 안정적인 학습 곡선**을 보여주었다.
+
+---
+
+### 4.2️⃣ 전체 데이터셋 Inference 결과
+
+- 학습된 모델을 전체 리뷰 데이터(28,570건)에 적용한 결과는 다음과 같다.
+
+```
+Using device: cuda
+전체 리뷰 데이터에 대한 MobileBERT 정확도: 0.9236
+Process finished with exit code 0
+```
+
+✅ **최종 Test Accuracy: 92.36%**
+
+📌 전체 리뷰를 기준으로 학습된 모델의 **일반화 성능이 매우 높음**을 확인할 수 있다.
+
 
 
 
