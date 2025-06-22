@@ -74,7 +74,7 @@
 ### 2.1 원시 데이터
 
 본 프로젝트에서 사용한 데이터는 Kaggle에서 제공하는 맥도날드 리뷰 데이터셋이다.  
-[[맥도날드 리뷰 데이터셋 바로가기]](https://www.kaggle.com/datasets) 
+[[맥도날드 리뷰 데이터셋 바로가기]](https://www.kaggle.com/datasets/nelgiriyewithana/mcdonalds-store-reviews/data)
 
 * 데이터 구성
 
