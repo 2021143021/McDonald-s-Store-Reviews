@@ -28,7 +28,8 @@
 
 ### 리뷰 플랫폼 예시 이미지
 
-![Uploading yelp.jpg…]()
+
+![yelp](https://github.com/user-attachments/assets/15c7c8fd-b303-46d1-a100-1bfbabfba5bc)
 
 
 ![trip](https://github.com/user-attachments/assets/af3c767a-e62b-4f74-ba2c-5e89ff1a2d53)
