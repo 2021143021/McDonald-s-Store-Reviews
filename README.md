@@ -29,11 +29,10 @@
 ### 리뷰 플랫폼 예시 이미지
 
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Yelp_Logo.svg/2560px-Yelp_Logo.svg.png" width="300" />
-  ![trip](https://github.com/user-attachments/assets/af3c767a-e62b-4f74-ba2c-5e89ff1a2d53)
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Yelp_Logo.svg/2560px-Yelp_Logo.svg.png" width="150" />
 </p>
 
-
+![trip](https://github.com/user-attachments/assets/af3c767a-e62b-4f74-ba2c-5e89ff1a2d53)
 
 
 
