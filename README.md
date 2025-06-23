@@ -185,10 +185,10 @@
 | 3     | 0.1786         | 97.06%         | 93.25%              |
 | 4     | 1.0507         | 97.25%         | 93.50%              |
 
-<p align="center">
-  <img src="./images/sample_loss_plot_ko.png" width="45%" alt="샘플 데이터 손실 그래프" />
-  <img src="./images/sample_acc_plot_ko.png"  width="45%" alt="샘플 데이터 정확도 그래프" />
-</p>
+
+  ![Image](https://github.com/user-attachments/assets/1bf749b4-bc40-4d95-adb9-26d214f8712d)
+  ![Image](https://github.com/user-attachments/assets/b4b25600-cb5c-4baa-9cf0-14b700e856d1)
+
 
 ---
 
@@ -202,8 +202,8 @@
 | 4     | 0.1359       | 97.88%         | 95.03%              |
 
 <p align="center">
-  <img src="./images/full_loss_plot_ko.png" width="45%" alt="전체 데이터 손실 그래프" />
-  <img src="./images/full_acc_plot_ko.png"  width="45%" alt="전체 데이터 정확도 그래프" />
+  ![Image](https://github.com/user-attachments/assets/9ca8ff82-2469-4eab-b827-f776a348d5a0)
+  ![Image](https://github.com/user-attachments/assets/730168c3-c722-47aa-942d-94acccb99479)
 </p>
 
 ---
