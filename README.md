@@ -208,14 +208,15 @@
 
 ## 4.3️⃣ 전체 데이터셋 Inference 결과
 
-
 - 전체 28,570건에 대해 학습된 모델을 적용하여 **Test Accuracy: 92.36%** 를 달성하였다.
 
-text
+```
 Using device: cuda
 ...
 전체 리뷰 데이터에 대한 MobileBERT 정확도: 0.9236
 Process finished with exit code 0
+```
+
 
 ---
 ---
