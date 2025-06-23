@@ -201,10 +201,10 @@
 | 3     | 0.2624       | 97.67%         | 94.96%              |
 | 4     | 0.1359       | 97.88%         | 95.03%              |
 
-<p align="center">
+
   ![Image](https://github.com/user-attachments/assets/9ca8ff82-2469-4eab-b827-f776a348d5a0)
   ![Image](https://github.com/user-attachments/assets/730168c3-c722-47aa-942d-94acccb99479)
-</p>
+
 
 ---
 
