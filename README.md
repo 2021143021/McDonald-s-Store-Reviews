@@ -166,58 +166,51 @@
 - 두 방식을 비교 분석하여 모델의 일반화 성능과 현실 반영 성능을 모두 확인하였다.
 
 
-## 4. 📊 MobileBERT 학습 결과
+## 4. 📊MobileBERT Finetuning(재학습, 미세조정) 결과
+
+### 🧪 실험 개요
+- 전체 데이터 수: 28,570건
+- 실험1: 2,000건 샘플 데이터셋 학습 (train:valid = 1,600:400)
+- 실험2: 전체 데이터셋 학습 (train:valid = 22,856:5,714)
+- 실험3: 전체 데이터셋에 대해 추론(Inference)
 
 ---
 
-### 💻 개발환경
+### 4.1️⃣ 첫 번째 실험 (2,000건 샘플 데이터)
 
-<img src="https://img.shields.io/badge/python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white" />
-<img src="https://img.shields.io/badge/pycharm-%23000000.svg?&style=for-the-badge&logo=pycharm&logoColor=white" />
-
-### 📦 사용 패키지
-
-<img src="https://img.shields.io/badge/pandas-%23150458.svg?&style=for-the-badge&logo=pandas&logoColor=white" />
-<img src="https://img.shields.io/badge/pytorch-%23EE4C2C.svg?&style=for-the-badge&logo=pytorch&logoColor=white" />
-<img src="https://img.shields.io/badge/tensorflow-%23FF6F00.svg?&style=for-the-badge&logo=tensorflow&logoColor=white" />
-<img src="https://img.shields.io/badge/numpy-%23013243.svg?&style=for-the-badge&logo=numpy&logoColor=white" />
-
----
-
-### 4.1️⃣ 실험 결과 비교
-
-| 학습 데이터 종류     | Epoch | Train Loss       | Train Accuracy | Validation Accuracy |
-|----------------------|:-----:|------------------|----------------|----------------------|
-| **첫 번째 실험** (2,000건 샘플) | 1     | 282,444.8209     | 91.81%         | 91.75%               |
-|                              | 2     | 0.3823           | 95.75%         | 93.25%               |
-|                              | 3     | 0.1786           | 97.06%         | 93.25%               |
-|                              | 4     | 1.0507           | 97.25%         | 93.50%               |
-| **두 번째 실험** (2,857건 비율 샘플) | 1     | 18,483.2734      | 95.38%         | 93.65%               |
-|                              | 2     | 0.4730           | 96.86%         | 94.33%               |
-|                              | 3     | 0.2624           | 97.67%         | 94.96%               |
-|                              | 4     | 0.1359           | 97.88%         | 95.03%               |
-
----
-
-### 4.2️⃣ Epoch별 손실값 & 정확도 시각화
+| Epoch | Train Loss     | Train Accuracy | Validation Accuracy |
+|:-----:|:---------------|:---------------|:-------------------:|
+| 1     | 282,444.8209   | 91.81%         | 91.75%              |
+| 2     | 0.3823         | 95.75%         | 93.25%              |
+| 3     | 0.1786         | 97.06%         | 93.25%              |
+| 4     | 1.0507         | 97.25%         | 93.50%              |
 
 <p align="center">
-  <img src="./images/sample_loss_plot.png" width="45%" alt="샘플 손실 그래프" /> <img src="./images/sample_acc_plot.png" width="45%" alt="샘플 정확도 그래프" />
-</p>
-<p align="center">
-  <img src="./images/full_loss_plot.png" width="45%" alt="전체 손실 그래프" /> <img src="./images/full_acc_plot.png" width="45%" alt="전체 정확도 그래프" />
+  <img src="./images/sample_loss_plot_ko.png" width="45%" alt="샘플 데이터 손실 그래프" />
+  <img src="./images/sample_acc_plot_ko.png"  width="45%" alt="샘플 데이터 정확도 그래프" />
 </p>
 
-📌 **분석 요약**  
-- 첫 번째 모델은 학습 초기 Loss가 크지만, 빠르게 감소하며 안정적인 학습곡선을 보임.  
-- 두 번째 모델은 초기 성능은 뛰어나나 후반부에 과적합 가능성이 보임.  
-- 두 모델 모두 우수한 정확도를 기록했으나, **첫 번째 모델이 더 안정적인 학습 결과**를 보였음.
+---
+
+### 4.2️⃣ 두 번째 실험 (전체 28,570건 데이터)
+
+| Epoch | Train Loss   | Train Accuracy | Validation Accuracy |
+|:-----:|:-------------|:---------------|:-------------------:|
+| 1     | 18,483.2734  | 95.38%         | 93.65%              |
+| 2     | 0.4730       | 96.86%         | 94.33%              |
+| 3     | 0.2624       | 97.67%         | 94.96%              |
+| 4     | 0.1359       | 97.88%         | 95.03%              |
+
+<p align="center">
+  <img src="./images/full_loss_plot_ko.png" width="45%" alt="전체 데이터 손실 그래프" />
+  <img src="./images/full_acc_plot_ko.png"  width="45%" alt="전체 데이터 정확도 그래프" />
+</p>
 
 ---
 
 ### 4.3️⃣ 전체 데이터셋 Inference 결과
 
-- 전체 리뷰 **28,570건**에 대해 MobileBERT 모델을 적용한 결과:
+- 전체 28,570건에 대해 학습된 모델을 적용하여 **Test Accuracy: 92.36%** 를 달성하였다.
 
 ```text
 Using device: cuda
