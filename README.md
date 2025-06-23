@@ -218,7 +218,8 @@ Using device: cuda
 전체 리뷰 데이터에 대한 MobileBERT 정확도: 0.9236
 Process finished with exit code 0
 
---- 
+---
+<br> <br>
 
 ## 5. 📝느낀점 및 배운점
 
