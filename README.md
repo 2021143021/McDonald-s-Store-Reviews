@@ -219,7 +219,7 @@ Using device: cuda
 Process finished with exit code 0
 
 ---
-<br> <br>
+
 
 ## 5. 📝느낀점 및 배운점
 
